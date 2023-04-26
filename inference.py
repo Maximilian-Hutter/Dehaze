@@ -12,8 +12,8 @@ from params import hparams
 
 parser = argparse.ArgumentParser(description='PyTorch Dehaze')
 parser.add_argument('--modelpath', type=str, default="weights/999Dehaze.pth", help=("path to the model .pth files"))
-parser.add_argument('--inferencepath', type=str, default='D:/Data/Smoke/test/hazy/', help=("Path to image folder"))
-parser.add_argument('--gtpath', type=str, default=None, help=("Path to image folder"))
+parser.add_argument('--inferencepath', type=str, default='', help=("Path to image folder"))
+parser.add_argument('--gtpath', type=str, default="", help=("Path to image folder"))
 parser.add_argument('--gpu_mode', type=bool, default=False, help=('enable cuda'))
     
 if __name__ == '__main__':
@@ -25,12 +25,13 @@ if __name__ == '__main__':
     PATH = opt.modelpath
     #imagespath = (opt.inferencepath + opt.imagename)
     imagespath = os.listdir(opt.inferencepath)
-    gtpath = os.listdir(opt.gtpath)
+    if opt.gtpath != "":
+        gtpath = os.listdir(opt.gtpath)
     if not os.path.isdir("results"):
         os.mkdir("results")
 
     for i,imagepath in enumerate(imagespath):  
-        if gtpath is not None:
+        if opt.gtpath != "":
             gtimg = Image.open(opt.gtpath + gtpath[i])
             gtimg = gtimg.resize((int(hparams["height"]), int(hparams["width"])))
             gtimg.save('results/'+str(i)+"_GT"+'.png')
@@ -71,7 +72,7 @@ if __name__ == '__main__':
             psnrate = myutils.psnr(image,out)
             psnrrating.append(psnrate)
 
-        print("Inferencetime is: " + str(proctime) + "seconds")
+        print("Inferencetime is: " + str(proctime) + " seconds")
         out.save('results/'+str(i)+'_Dehaze.png')
         pseudo = transform(pseudo.squeeze(0))
         pseudo.save('results/'+str(i)+'_Pseudo.png')

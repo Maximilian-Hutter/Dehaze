@@ -21,11 +21,11 @@ if __name__ == "__main__":
     # defining shapes
 
 
-    Net = Dehaze(hparams["mhac_filter"], hparams["mha_filter"], hparams["num_mhablock"], hparams["num_mhac"], hparams["num_parallel_conv"],hparams["kernel_list"], hparams["pad_list"],hparams["down_deep"] ,hparams["gpu_mode"], hparams["scale_factor"], hparams["pseudo_alpha"], hparams["hazy_alpha"], size=(hparams["height"], hparams["width"]))
+    Net = CSDLKCB(16,16)
     
 
     start = time.time()
-    summary(Net, (3, 640, 360), device="cpu")
+    summary(Net, (16, 640, 360), device="cpu")
     end = time.time()
 
     proctime = end-start

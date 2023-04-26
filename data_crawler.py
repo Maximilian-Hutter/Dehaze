@@ -11,7 +11,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='PyTorch Dehaze Data Crawler')
 parser.add_argument('--pathtoaddon', type=str, default=None, help=("Path to adblock"))
-parser.add_argument('--outpath', type=bool, default="./DehazeDataset/", help=('Dataset Output Folder'))
+parser.add_argument('--outpath', type=str, default="./DehazeDataset/", help=('Dataset Output Folder'))
 opt = parser.parse_args()
 
 if not os.path.isdir(opt.outpath):

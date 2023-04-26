@@ -1,11 +1,11 @@
 hparams = {
     "seed": 123,
     "gpus": 1,
-    "gpu_mode": True,  #True
+    "gpu_mode": False,  #True
     "crop_size": None,
     "resume": False,
-    "test_data_path": "C:/Data/dehaze/SOTS/outdoor/",
-    "train_data_path": "C:/Data/dehaze/prepared/", #C:/Data/dehaze/prepared/
+    "test_data_path": "D:/Data/Data/dehaze/SOTS/outdoor/",
+    "train_data_path": "D:/Data/Data/dehaze/prepared/", #C:/Data/dehaze/prepared/
     "augment_data": True,
     "epochs_o_haze": 1000,
     "epochs_nh_haze": 2000,

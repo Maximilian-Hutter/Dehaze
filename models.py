@@ -409,7 +409,7 @@ class Deep(nn.Module):
         x = self.norm(x)
         # x = x + x.min()
         # x = torch.div(x,x.max())
-        myutils.save_tensorimg(x,"after afftail")
+        #myutils.save_tensorimg(x,"after afftail")
         ##myutils.save_tensorimg(x,"after tail")
 
         return x
