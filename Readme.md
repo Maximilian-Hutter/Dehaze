@@ -1,13 +1,5 @@
-# Table of Content
-Usage
-Dataset
-Picture Inference
-Webcam and Video inference
-Training
-Model
-Utility
 # Usage
-The use this repository yourself you need the packages in requirements.txt.
+The use this repository yourself you need following packages: torch, torchvision, opencv, numpy, argparse, BeautifulSoup, selenium, datetime, PIL, scipy, tqdm, prefetch_generator, torchsummary, optuna, 
 ## Inference
 For inference of pictures you just need to start inference.py with the needed options, Picture Inference explains this in more detail. For Video Inference you just need to start data_capture.py.
 ## Training
