@@ -145,12 +145,12 @@ def prepare_imgdatadir(path, outpath, substring = None, numerate = False, startn
     if not os.path.isdir(outpath):
         os.mkdir(outpath)
     all_files = []
-    if multiple_dirs is True:
+    if multiple_dirs is True:   # if there are multiple dirs (like in cityscapes) filter through all dirs and combine them into one
         dirs = os.listdir(path)
         for dir in dirs:
             files = os.listdir(path + "/" + dir)
             outfiles = []
-            if substring != None:
+            if substring != None:   # choose only files with the given substring
                 for file in files:
                     if substring in file:
                         outfiles.append(file)
@@ -173,26 +173,26 @@ def prepare_imgdatadir(path, outpath, substring = None, numerate = False, startn
             img = Image.open(path + "/" + file)
 
 
-            if five_crop == True:
+            if five_crop == True:   # cut image into 5 parts (to increase data)
                 crop = T.FiveCrop(size=size)
                 imgtup = crop(img)
-                for a,img in enumerate(imgtup):
+                for a,img in enumerate(imgtup): 
                     img.save(outpath +str(i) +"_" +str(a) + ".png")
 
 
             elif size != None:
-                img = img.resize(size)
+                img = img.resize(size)  #resize to size
             if crop_size != None:
                 img = crop_center(img, crop_size[0], crop_size[1])
-            if first_section_only is True:
+            if first_section_only is True:  # only take the name up until the first _
                 file = file.split("_")
                 img.save(outpath + file[0] + ".png")
-            if numerate:
+            if numerate:    # change the names to numbers
                 img.save(outpath + str(i) + ".png")
-           # else:
-                #img.save(outpath + file)
+            else:
+                img.save(outpath + file)
 
 
 if __name__ == "__main__":
-    random_choose_images("./results/", "./chosen_pics/")
-    #prepare_imgdatadir("C:/Data/dehaze/SOTS/outdoor/input/", "C:/Data/dehaze/SOTS/outdoor/prepped/" ,substring = None ,numerate=False,startnum = 1, size=(640,360), multiple_dirs=False, five_crop=False, first_section_only=True)
+    #random_choose_images("./results/", "./chosen_pics/")
+    prepare_imgdatadir("C:/Data/dehaze/SOTS/outdoor/input/", "C:/Data/dehaze/SOTS/outdoor/prepped/" ,substring = None ,numerate=False,startnum = 1, size=(640,360), multiple_dirs=False, five_crop=False, first_section_only=True)
